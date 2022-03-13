@@ -36,3 +36,6 @@ IBAN_Validation/IBAN_Validation/obj/Debug/IBAN_Validation_MarkupCompile.cache
 IBAN_Validation/IBAN_Validation/obj/Debug/IBAN_Validation_MarkupCompile.lref
 IBAN_Validation/IBAN_Validation/obj/Debug/MainWindow.baml
 IBAN_Validation/IBAN_Validation/obj/Debug/MainWindow.g.cs
+IBAN_Validation/IBAN_validationTests/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+IBAN_Validation/IBAN_validationTests/Properties/AssemblyInfo.cs
+IBAN_Validation/IBAN_validationTests/IBAN_validationTests.csproj
