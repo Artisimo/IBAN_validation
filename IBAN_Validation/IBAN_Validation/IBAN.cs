@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 
 namespace IBAN_Validation
 {
-    class IBAN
+    public class IBAN
     {
         public string IBANstring { get; set; }
         public bool IBANvalid { get; set; }
-        public bool containsOnlyLettersDigits { get; set; }
+        public bool IBANValidForChecking { get; set; }
         public bool checksumCorrect { get; set; }
         public string country { get; set; }
         public bool lengthMatchesCountryRules { get; set; }
-        private bool areFirstTwoLettersCorrect;
+        private bool FirstTwoLettersAreCountryLetters;
         private int supposedLength;
 
         public IBAN(string IBAN)
         {
 
             IBANstring = IBAN;
-            containsOnlyLettersDigits = DoesIBANContainOnlyLettersDigits();
-            areFirstTwoLettersCorrect = AreFirstTwoLettersForCountry();
+            IBANValidForChecking = IsIBANValidForChecking();
+            FirstTwoLettersAreCountryLetters = AreFirstTwoLettersForCountry();
             lengthMatchesCountryRules = lengthMatchesCountryLength();
-            checksumCorrect = isCheckSumCorrect();
-            if (checksumCorrect && lengthMatchesCountryRules && containsOnlyLettersDigits)
+            checksumCorrect = IsCheckSumCorrect();
+            if (checksumCorrect && lengthMatchesCountryRules && IBANValidForChecking && FirstTwoLettersAreCountryLetters)
             {
                 IBANvalid = true;
             }
@@ -35,7 +35,7 @@ namespace IBAN_Validation
             }
         }
 
-        private bool DoesIBANContainOnlyLettersDigits()
+        private bool IsIBANValidForChecking()
         {
             if (IBANstring.Length == 0 || IBANstring.Length < 15 || IBANstring.Length > 35) { return false; }
             foreach (char c in IBANstring)
@@ -66,7 +66,7 @@ namespace IBAN_Validation
                     {"TL", 23},{"TN", 24},{"TR", 26}, {"UA", 29},{"AE", 23}, {"GB", 22},
                     {"VG", 24}};
 
-            if(IBANstring.Length >= 2)
+            if(IBANValidForChecking)
             {
                 string firstTwoLetters = IBANstring.Substring(0, 2);
                 if (countryIBANLength.ContainsKey(firstTwoLetters))
@@ -92,9 +92,9 @@ namespace IBAN_Validation
             return false;
         }
 
-        private bool isCheckSumCorrect()
+        private bool IsCheckSumCorrect()
         {
-            string IBANdigits = convertToDigits(IBANstring);
+            string IBANdigits = ConvertToDigits(IBANstring);
             if (mod97(IBANdigits) == 1)
             {
                 return true;
@@ -102,41 +102,47 @@ namespace IBAN_Validation
             return false;
         }
 
-        private string convertToDigits(string IBAN)
+        private string ConvertToDigits(string IBANstr)
         {
-
-            if (areFirstTwoLettersCorrect)
+            if (IBANValidForChecking && FirstTwoLettersAreCountryLetters)
             {
-                string appendToEnd = IBAN.Substring(0, 4);
-                IBAN += (appendToEnd);
-                IBAN = IBAN.Substring(4);
-
+                IBANstr = AppendCountryAndCheckDigitsToEnd(IBANstr);
                 char symbol;
                 int symbolInt;
-                for (int i = 0; i < IBAN.Length; i++)
+                for (int i = 0; i < IBANstr.Length; i++)
                 {
-                    symbol = IBAN[i];
+                    symbol = IBANstr[i];
                     if (Char.IsLetter(symbol))
                     {
                         symbolInt = (int)Char.ToUpper(symbol);
                         symbolInt -= 55;
-                        IBAN = IBAN.Remove(i, 1).Insert(i, symbolInt.ToString());
+                        IBANstr = IBANstr.Remove(i, 1).Insert(i, symbolInt.ToString());
                     }
                 }
-                return IBAN;
+                return IBANstr;
             }
             return "0"; // So if first 2 letters arent country letters, checksum is always wrong
         }
 
-        private int mod97(string IBAN)
+        private string AppendCountryAndCheckDigitsToEnd(string IBANstr)
+        {
+            if (FirstTwoLettersAreCountryLetters)
+            {
+                string appendToEnd = IBANstr.Substring(0, 4);
+                IBANstr += (appendToEnd);
+                IBANstr = IBANstr.Substring(4);
+            }
+            return IBANstr;
+        }
+
+        private int mod97(string IBANstrDigits)
         {
             int result = 0;
 
-            for (int i = 0; i < IBAN.Length; i++)
+            for (int i = 0; i < IBANstrDigits.Length; i++)
             {
-                result = (result * 10 + IBAN[i] - '0') % 97;
+                result = (result * 10 + IBANstrDigits[i] - '0') % 97;
             }
-
             return result;
         }
     }
