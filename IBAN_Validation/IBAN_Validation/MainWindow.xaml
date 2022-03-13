@@ -7,6 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="800"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="IBAN_input" HorizontalAlignment="Left" Height="20" Margin="113,20,0,0" TextWrapping="Wrap" Text="enter IBAN" VerticalAlignment="Top" Width="230"/>
+        <Button x:Name="Validate" Content="Validate" HorizontalAlignment="Left" Margin="343,20,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="Validate_Click" RenderTransformOrigin="0.957,1.363" Grid.ColumnSpan="2"/>
+
+        <DataGrid x:Name="IBAN_table" HorizontalAlignment="Left" Height="auto" VerticalAlignment="Top" Width="577" Margin="113,47,0,0" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="IBAN Number" Binding="{Binding IBANstring}" Width="220"/>
+                <DataGridCheckBoxColumn Header="Valid" Binding="{Binding IBANvalid}" Width="40"/>
+                <DataGridCheckBoxColumn Header="Correct input" Binding="{Binding containsOnlyLettersDigits}" Width="90"/>
+                <DataGridCheckBoxColumn Header="Checksum" Binding="{Binding checksumCorrect}" Width="70"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding country}" Width="55"/>
+                <DataGridCheckBoxColumn Header="Correct length" Binding="{Binding lengthMatchesCountryRules}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>

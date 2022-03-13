@@ -20,9 +20,21 @@ namespace IBAN_Validation
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<IBAN> IBANlist = new List<IBAN>();
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Validate_Click(object sender, RoutedEventArgs e) { 
+            {
+                IBAN_table.ItemsSource = IBANlist;
+            }
+
+            string IBAN = IBAN_input.Text;
+            IBANlist.Add(new IBAN(IBAN));
+
+            IBAN_table.Items.Refresh();
         }
     }
 }

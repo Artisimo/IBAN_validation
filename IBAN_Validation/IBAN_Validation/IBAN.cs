@@ -8,14 +8,14 @@ namespace IBAN_Validation
 {
     class IBAN
     {
-        private string IBANstring;
-        private bool IBANvalid;
-        private bool containsOnlyLettersDigits;
-        private bool checksumCorrect;
+        public string IBANstring { get; set; }
+        public bool IBANvalid { get; set; }
+        public bool containsOnlyLettersDigits { get; set; }
+        public bool checksumCorrect { get; set; }
+        public string country { get; set; }
+        public bool lengthMatchesCountryRules { get; set; }
         private bool areFirstTwoLettersCorrect;
-        private string country;
         private int supposedLength;
-        private bool lengthMatchesCountryRules;
 
         public IBAN(string IBAN)
         {
