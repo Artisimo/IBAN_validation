@@ -26,15 +26,60 @@ namespace IBAN_Validation
             InitializeComponent();
         }
 
-        private void Validate_Click(object sender, RoutedEventArgs e) { 
+        private void Validate_Click(object sender, RoutedEventArgs e)
+        {
+            ErrorBoard.Text = "";
+            if(IBANlist.Count == 0)
             {
                 IBAN_table.ItemsSource = IBANlist;
             }
 
-            string IBAN = IBAN_input.Text;
-            IBANlist.Add(new IBAN(IBAN));
+            string IBANstr = IBAN_input.Text;
+            if (IBANstr.Length != 0)
+            {
+                IBANlist.Add(new IBAN(IBANstr));
+                IBAN_table.Items.Refresh();
+            }
+            else
+            {
+                ErrorBoard.Text = "Please enter an IBAN number";
+            }
+        }
 
-            IBAN_table.Items.Refresh();
+        private void Choose_file_Click(object sender, RoutedEventArgs e)
+        {
+            ErrorBoard.Text = "";
+            if (IBANlist.Count == 0)
+            {
+                IBAN_table.ItemsSource = IBANlist;
+            }
+            string filePath = getFilePath();
+
+            if(filePath == "")
+            {
+                ErrorBoard.Text = "No file selected";
+            }
+            else
+            {
+                foreach (string line in System.IO.File.ReadLines(filePath))
+                {
+                    if(line.Length != 0)
+                    {
+                        IBANlist.Add(new IBAN(line));
+                    }
+                }
+                IBAN_table.Items.Refresh();
+            }
+        }
+        private string getFilePath()
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.DefaultExt = ".txt"; // Default file extension
+            dialog.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+
+            bool? result = dialog.ShowDialog();
+
+            return dialog.FileName;
         }
     }
 }

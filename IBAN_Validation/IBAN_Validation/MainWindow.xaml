@@ -12,7 +12,9 @@
         </Grid.ColumnDefinitions>
         <TextBox x:Name="IBAN_input" HorizontalAlignment="Left" Height="20" Margin="113,20,0,0" TextWrapping="Wrap" Text="enter IBAN" VerticalAlignment="Top" Width="230"/>
         <Button x:Name="Validate" Content="Validate" HorizontalAlignment="Left" Margin="343,20,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="Validate_Click" RenderTransformOrigin="0.957,1.363" Grid.ColumnSpan="2"/>
-
+        <Label Content="OR" HorizontalAlignment="Left" Margin="425,17,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="Choose_file" Content="Choose File" HorizontalAlignment="Left" Margin="464,20,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="Choose_file_Click"/>
+        <TextBlock x:Name="ErrorBoard" HorizontalAlignment="Left" Margin="550,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto"/>
         <DataGrid x:Name="IBAN_table" HorizontalAlignment="Left" Height="auto" VerticalAlignment="Top" Width="577" Margin="113,47,0,0" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="IBAN Number" Binding="{Binding IBANstring}" Width="220"/>
