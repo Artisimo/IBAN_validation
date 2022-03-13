@@ -37,7 +37,7 @@ namespace IBAN_Validation
 
         private bool DoesIBANContainOnlyLettersDigits()
         {
-            if (IBANstring.Length == 0) { return false; }
+            if (IBANstring.Length == 0 || IBANstring.Length < 15 || IBANstring.Length > 35) { return false; }
             foreach (char c in IBANstring)
             {
                 if (!char.IsLetterOrDigit(c))

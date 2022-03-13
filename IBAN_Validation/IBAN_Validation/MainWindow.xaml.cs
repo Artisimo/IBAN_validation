@@ -24,6 +24,7 @@ namespace IBAN_Validation
         public MainWindow()
         {
             InitializeComponent();
+            clear_button.Visibility = Visibility.Hidden;
         }
 
         private void Validate_Click(object sender, RoutedEventArgs e)
@@ -39,11 +40,13 @@ namespace IBAN_Validation
             {
                 IBANlist.Add(new IBAN(IBANstr));
                 IBAN_table.Items.Refresh();
+                placeClearButton();
             }
             else
             {
                 ErrorBoard.Text = "Please enter an IBAN number";
             }
+
         }
 
         private void Choose_file_Click(object sender, RoutedEventArgs e)
@@ -69,6 +72,7 @@ namespace IBAN_Validation
                     }
                 }
                 IBAN_table.Items.Refresh();
+                placeClearButton();
             }
         }
         private string getFilePath()
@@ -80,6 +84,23 @@ namespace IBAN_Validation
             bool? result = dialog.ShowDialog();
 
             return dialog.FileName;
+        }
+
+        private void clear_button_Click(object sender, RoutedEventArgs e)
+        {
+            IBANlist.Clear();
+            IBAN_table.Items.Refresh();
+            clear_button.Visibility = Visibility.Hidden;
+        }
+
+        private void placeClearButton()
+        {
+            if (IBANlist.Count > 0)
+            {
+                int topMargin = (19 * IBANlist.Count) + 75;
+                clear_button.Margin = new Thickness(615, topMargin, 0, 0);
+                clear_button.Visibility = Visibility.Visible;
+            }
         }
     }
 }
