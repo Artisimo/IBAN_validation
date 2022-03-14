@@ -45,7 +45,6 @@ namespace IBAN_Validation
                 IBANlist.Add(new IBAN(IBANstr));
                 IBAN_table.Items.Refresh();
                 placeClearButton();
-                //displayScrollbar();
             }
         }
 

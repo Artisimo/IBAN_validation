@@ -14,7 +14,7 @@ namespace IBAN_Validation
         private bool FirstTwoLettersAreCountryLetters;
         private int supposedLength;
 
-        public IBAN(string IBAN)
+        public IBAN(string IBAN)                                                                // constructor which initializes class property values when called
         {
             IBANstring = IBAN;
             IBANValidForChecking = IsIBANValidForChecking();
@@ -33,7 +33,8 @@ namespace IBAN_Validation
             return false;
         }
 
-        private bool IsIBANValidForChecking()
+        private bool IsIBANValidForChecking()                                                   // Returns true if 15 < IBAN number length < 35 and if 
+                                                                                                // there are no symbols that aren't either digits or letters in the IBAN number
         {
             if (IBANstring.Length == 0 || IBANstring.Length < 15 || IBANstring.Length > 35) { return false; }
             foreach (char c in IBANstring)
@@ -46,7 +47,8 @@ namespace IBAN_Validation
             return true;
         }
 
-        private bool AreFirstTwoLettersForCountry()
+        private bool AreFirstTwoLettersForCountry()                     // Checks whether or not the first two Letters for IBAN number are for country. 
+                                                                        // If they are, it then sets suposedLength to match.
         {
             var countryIBANLength = new Dictionary<string, int>(){
                     {"AL", 28},{"AD", 24},{"AT", 20},{"AZ", 28},{"BH", 22},{"BY", 28},
@@ -100,8 +102,8 @@ namespace IBAN_Validation
             return false;
         }
 
-        private string ConvertToDigits(string IBANstr)
-        {
+        private string ConvertToDigits(string IBANstr)                                  
+        {                                                                               // Converts letters to digits so that A - 10, B - 11 and so on.
             if (IBANValidForChecking && FirstTwoLettersAreCountryLetters)
             {
                 IBANstr = AppendCountryAndCheckDigitsToEnd(IBANstr);
@@ -122,7 +124,7 @@ namespace IBAN_Validation
             return "0"; // So if first 2 letters arent country letters, checksum is always wrong
         }
 
-        private string AppendCountryAndCheckDigitsToEnd(string IBANstr)
+        private string AppendCountryAndCheckDigitsToEnd(string IBANstr)             // Removes first 4 symbols of IBAN string and appends them to the end of the string.
         {
             if (FirstTwoLettersAreCountryLetters)
             {

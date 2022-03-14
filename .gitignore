@@ -242,3 +242,5 @@ IBAN_Validation/packages/MSTest.TestFramework.2.2.8/lib/netstandard1.0/tr/Micros
 IBAN_Validation/packages/MSTest.TestFramework.2.2.8/lib/netstandard1.0/tr/Microsoft.VisualStudio.TestPlatform.TestFramework.xml
 IBAN_Validation/packages/MSTest.TestFramework.2.2.8/lib/netstandard1.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
 IBAN_Validation/packages/MSTest.TestFramework.2.2.8/lib/netstandard1.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+IBAN_Validation/IBAN_validation_setup/Debug/setup.exe
+IBAN_Validation/IBAN_validation_setup/IBAN_validation_setup.vdproj
