@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IBAN_Validation
 {
@@ -19,20 +16,21 @@ namespace IBAN_Validation
 
         public IBAN(string IBAN)
         {
-
             IBANstring = IBAN;
             IBANValidForChecking = IsIBANValidForChecking();
             FirstTwoLettersAreCountryLetters = AreFirstTwoLettersForCountry();
             lengthMatchesCountryRules = lengthMatchesCountryLength();
             checksumCorrect = IsCheckSumCorrect();
+            IBANvalid = IsIBANValid();
+        }
+
+        private bool IsIBANValid()
+        {
             if (checksumCorrect && lengthMatchesCountryRules && IBANValidForChecking && FirstTwoLettersAreCountryLetters)
             {
-                IBANvalid = true;
+                return true;
             }
-            else
-            {
-                IBANvalid = false;
-            }
+            return false;
         }
 
         private bool IsIBANValidForChecking()

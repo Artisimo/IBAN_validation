@@ -19,7 +19,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="IBAN Number" Binding="{Binding IBANstring}" Width="220"/>
                 <DataGridCheckBoxColumn Header="Valid" Binding="{Binding IBANvalid}" Width="40"/>
-                <DataGridCheckBoxColumn Header="Correct input" Binding="{Binding containsOnlyLettersDigits}" Width="90"/>
+                <DataGridCheckBoxColumn Header="Correct input" Binding="{Binding IBANValidForChecking}" Width="90"/>
                 <DataGridCheckBoxColumn Header="Checksum" Binding="{Binding checksumCorrect}" Width="70"/>
                 <DataGridTextColumn Header="Country" Binding="{Binding country}" Width="55"/>
                 <DataGridCheckBoxColumn Header="Correct length" Binding="{Binding lengthMatchesCountryRules}" Width="100"/>

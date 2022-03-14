@@ -36,17 +36,16 @@ namespace IBAN_Validation
             }
 
             string IBANstr = IBAN_input.Text;
-            if (IBANstr.Length != 0)
+            if (IBANstr == "" || IBANstr == "enter IBAN")
+            {
+                ErrorBoard.Text = "Please enter an IBAN number";
+            }
+            else if (IBANstr.Length != 0)
             {
                 IBANlist.Add(new IBAN(IBANstr));
                 IBAN_table.Items.Refresh();
                 placeClearButton();
             }
-            else
-            {
-                ErrorBoard.Text = "Please enter an IBAN number";
-            }
-
         }
 
         private void Choose_file_Click(object sender, RoutedEventArgs e)
