@@ -45,6 +45,7 @@ namespace IBAN_Validation
                 IBANlist.Add(new IBAN(IBANstr));
                 IBAN_table.Items.Refresh();
                 placeClearButton();
+                //displayScrollbar();
             }
         }
 
@@ -94,10 +95,15 @@ namespace IBAN_Validation
 
         private void placeClearButton()
         {
-            if (IBANlist.Count > 0)
+            if (IBANlist.Count > 0 && IBANlist.Count < 15)
             {
                 int topMargin = (19 * IBANlist.Count) + 75;
                 clear_button.Margin = new Thickness(615, topMargin, 0, 0);
+                clear_button.Visibility = Visibility.Visible;
+            }
+            else if(IBANlist.Count >= 15)
+            {
+                clear_button.Margin = new Thickness(615, 15 * 19 + 75, 0, 0);
                 clear_button.Visibility = Visibility.Visible;
             }
         }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IBAN_Validation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="IBAN Validation" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="800"/>
@@ -15,7 +15,7 @@
         <Label Content="OR" HorizontalAlignment="Left" Margin="425,17,0,0" VerticalAlignment="Top"/>
         <Button x:Name="Choose_file" Content="Choose File" HorizontalAlignment="Left" Margin="464,20,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="Choose_file_Click"/>
         <TextBlock x:Name="ErrorBoard" HorizontalAlignment="Left" Margin="550,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Foreground="Red"/>
-        <DataGrid x:Name="IBAN_table" HorizontalAlignment="Left" Height="auto" VerticalAlignment="Top" Width="577" Margin="113,47,0,0" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column">
+        <DataGrid x:Name="IBAN_table" HorizontalAlignment="Left" Height="auto" MaxHeight="311" VerticalAlignment="Top" Width="577" Margin="113,47,0,0" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="IBAN Number" Binding="{Binding IBANstring}" Width="220"/>
                 <DataGridCheckBoxColumn Header="Valid" Binding="{Binding IBANvalid}" Width="40"/>
@@ -26,6 +26,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="clear_button" Content="Clear" HorizontalAlignment="Left" Margin="615,78,0,0" VerticalAlignment="Top" Width="75" Click="clear_button_Click"/>
-
+        <TextBlock HorizontalAlignment="Left" Margin="20,360,0,0" TextWrapping="Wrap" Text="info" FontSize="30" FontStyle="Italic" Foreground="Blue" VerticalAlignment="Top"
+                   ToolTip=" Valid - True if IBAN number is valid after all checks &#x0a; Correct input - True if IBAN number longer than 15 symbols but shorter than 36 and contains only letters and digits &#x0a; Checksum - True if checksum is correct  &#x0a; Country - Displays IBAN number's country &#x0a; Correct length - IBAN number length matches length rules for country"/>
     </Grid>
 </Window>
